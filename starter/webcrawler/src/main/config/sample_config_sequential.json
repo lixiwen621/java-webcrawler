@@ -1,0 +1,12 @@
+{
+  "startPages": ["https://www.taobao.com/","https://www.qq.com"],
+  "ignoredUrls": ["https://blod.taobao.com/.*"],
+  "ignoredWords": ["^.{1,3}$"],
+  "implementationOverride": "",
+  "parallelism": 3,
+  "maxDepth": 2,
+  "timeoutSeconds": 5,
+  "popularWordCount": 5,
+  "resultPath": "crawlResults.json",
+  "profileOutputPath": "profileData.txt"
+}

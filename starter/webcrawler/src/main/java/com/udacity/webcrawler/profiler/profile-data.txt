@@ -1,0 +1,28 @@
+Run at Sun, 1 Sep 2024 17:43:02 +0800
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 505ms
+
+Run at Tue, 1 Oct 2024 14:37:43 +0800
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 505ms
+
+Run at Tue, 1 Oct 2024 17:37:57 +0800
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 505ms
+
+Run at Tue, 1 Oct 2024 09:39:07 GMT
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 505ms
+
+Run at Sun, 6 Oct 2024 07:17:25 GMT
+
+Run at Sun, 6 Oct 2024 07:18:04 GMT
+
+Run at Sun, 6 Oct 2024 07:18:48 GMT
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 501ms
+
+Run at Sun, 3 Nov 2024 02:54:57 GMT
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 505ms
+
+Run at Tue, 12 Nov 2024 14:19:22 GMT
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 500ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+
+Run at Tue, 12 Nov 2024 14:20:13 GMT
+com.udacity.webcrawler.profiler.ExampleServiceImpl#doWork took 0m 0s 500ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+
