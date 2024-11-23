@@ -164,6 +164,46 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <!-- 检查代码漏洞插件 可以在编译阶段就进行检查-->
+<!--            <plugin>-->
+<!--                <groupId>com.github.spotbugs</groupId>-->
+<!--                <artifactId>spotbugs-maven-plugin</artifactId>-->
+<!--                <version>4.8.6.4</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <dependencies>-->
+<!--                    &lt;!&ndash; overwrite dependency on spotbugs if you want to specify the version of spotbugs &ndash;&gt;-->
+<!--                    <dependency>-->
+<!--                        <groupId>com.github.spotbugs</groupId>-->
+<!--                        <artifactId>spotbugs</artifactId>-->
+<!--                        <version>4.8.6</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--            </plugin>-->
         </plugins>
     </build>
+
+<!--    <reporting>-->
+<!--        <plugins>-->
+<!--            &lt;!&ndash; SpotBugs 插件 &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>com.github.spotbugs</groupId>-->
+<!--                <artifactId>spotbugs-maven-plugin</artifactId>-->
+<!--                <version>4.8.6.4</version>-->
+<!--            </plugin>-->
+
+<!--            &lt;!&ndash; 明确指定 maven-project-info-reports-plugin 的版本 &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-project-info-reports-plugin</artifactId>-->
+<!--                <version>3.4.1</version> &lt;!&ndash; 确保使用最新的稳定版本 &ndash;&gt;-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </reporting>-->
 </project>

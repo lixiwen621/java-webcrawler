@@ -126,10 +126,12 @@ final class ParallelWebCrawler implements WebCrawler {
       // Check if the URL matches any ignored pattern.
       // 如果 url 已经存在于 visitedUrls 集合中，说明该 URL 已经被爬取过，为了避免重复爬取，需要返回
       // 如果 url 匹配到 ignoredUrls 列表中的任意正则表达式，则该 URL 会被忽略，不再爬取
-      if (visitedUrls.contains(url) || ignoredUrls.stream().anyMatch(pattern -> pattern.matcher(url).matches())) {
-        return;
+      if (!visitedUrls.add(url)) {
+        return; // 已经访问过
       }
-      visitedUrls.add(url);
+      if (ignoredUrls.stream().anyMatch(pattern -> pattern.matcher(url).matches())) {
+        return; // 匹配到忽略规则
+      }
 
       // Parse the page.
       PageParser.Result result = parserFactory.get(url).parse();

@@ -52,8 +52,7 @@ public class CrawlerConfigDeserializer extends JsonDeserializer<CrawlerConfigura
 
     // 获取文本字段，若为空返回空字符串
     private String getAsTextOrEmpty(JsonNode node, String field) {
-        String string = node.hasNonNull(field) ? node.get(field).asText() : "";
-        return string;
+        return node.hasNonNull(field) ? node.get(field).asText() : "";
     }
 
     // 获取 int 字段，若为空返回默认值

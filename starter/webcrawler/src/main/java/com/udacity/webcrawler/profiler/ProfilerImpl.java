@@ -61,7 +61,7 @@ final class ProfilerImpl implements Profiler {
     if (!hasProfiledMethod) {
       throw new IllegalArgumentException("The delegate does not have any methods annotated with @Profiled");
     }
-    // 创建动态代理
+    // 创建动态代理 基于接口的动态代理
     // Proxy.newProxyInstance方法用于创建一个动态代理对象，该对象会拦截对klass接口的所有方法调用
     // ProfilingMethodInterceptor是一个实现了InvocationHandler接口的类，它负责在方法调用时记录方法的执行时间并将调用委托给实际的delegate对象
     return (T) Proxy.newProxyInstance(

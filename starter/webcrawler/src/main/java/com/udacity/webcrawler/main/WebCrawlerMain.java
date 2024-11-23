@@ -48,13 +48,13 @@ public final class WebCrawlerMain {
   }
 
   public static void main(String[] args) throws Exception {
-//    if (args.length != 1) {
-//      System.out.println("Usage: WebCrawlerMain [starting-url]");
-//      return;
-//    }
-    String path = "/Users/lixiwen/JavaProjects/cd0381-advanced-java-programming-techniques-projectstarter/starter/webcrawler/src/main/config/sample_config_sequential.json";
-    CrawlerConfiguration config = new ConfigurationLoader(Path.of(path)).load();
-    //CrawlerConfiguration config = new ConfigurationLoader(Path.of(args[0])).load();
+    if (args.length != 1) {
+      System.out.println("Usage: WebCrawlerMain [starting-url]");
+      return;
+    }
+    //String path = "/Users/lixiwen/JavaProjects/java-webcrawler/starter/webcrawler/src/main/config/sample_config_sequential.json";
+    //CrawlerConfiguration config = new ConfigurationLoader(Path.of(path)).load();
+    CrawlerConfiguration config = new ConfigurationLoader(Path.of(args[0])).load();
     new WebCrawlerMain(config).run();
   }
 }

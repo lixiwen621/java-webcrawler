@@ -61,8 +61,12 @@ final class ProfilingMethodInterceptor implements InvocationHandler {
         return method.invoke(delegate, args); // 执行方法
       }catch (InvocationTargetException e){
         log.error("ProfilingMethodInterceptor invoke Exception",e);
-        throw e.getCause();
-      } finally {
+        throw e.getTargetException();
+      } catch (IllegalAccessException e){
+        log.error("ProfilingMethodInterceptor IllegalAccessException",e);
+        throw new RuntimeException(e);
+      }
+      finally {
         Instant end = clock.instant(); // 记录方法结束时间
         Duration duration = Duration.between(start, end);
         state.record(delegate.getClass(), method, duration); // 记录方法的执行,并输出日志
