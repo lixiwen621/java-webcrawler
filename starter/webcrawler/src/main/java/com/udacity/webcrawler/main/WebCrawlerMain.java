@@ -52,8 +52,6 @@ public final class WebCrawlerMain {
       System.out.println("Usage: WebCrawlerMain [starting-url]");
       return;
     }
-    //String path = "/Users/lixiwen/JavaProjects/java-webcrawler/starter/webcrawler/src/main/config/sample_config_sequential.json";
-    //CrawlerConfiguration config = new ConfigurationLoader(Path.of(path)).load();
     CrawlerConfiguration config = new ConfigurationLoader(Path.of(args[0])).load();
     new WebCrawlerMain(config).run();
   }
