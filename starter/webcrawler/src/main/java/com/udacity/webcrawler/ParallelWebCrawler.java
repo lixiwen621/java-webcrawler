@@ -3,13 +3,12 @@ package com.udacity.webcrawler;
 import com.udacity.webcrawler.json.CrawlResult;
 import com.udacity.webcrawler.parser.PageParser;
 import com.udacity.webcrawler.parser.PageParserFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +25,7 @@ import java.util.stream.Collectors;
  *
  * 该类利用多线程并行爬取网页，特别是使用了 Java 的 ForkJoinPool 来并发处理多个网页
  */
+@Slf4j
 final class ParallelWebCrawler implements WebCrawler {
   // 用于获取当前时间。这个 Clock 对象允许在测试时进行模拟时间操作（比如，使用 Clock.fixed）
   private final Clock clock;
@@ -77,9 +77,13 @@ final class ParallelWebCrawler implements WebCrawler {
     Map<String, Integer> counts = new ConcurrentHashMap<>();
     Set<String> visitedUrls = new ConcurrentSkipListSet<>();
 
-    // 创建并行任务，并用 ForkJoinPool 执行
-    for (String url : startingUrls) {
-      pool.invoke(new CrawlTask(url, deadline, maxDepth, counts, visitedUrls));
+    try {
+      // 创建并行任务，并用 ForkJoinPool 执行
+      for (String url : startingUrls) {
+        pool.invoke(new CrawlTask(url, deadline, maxDepth, counts, visitedUrls));
+      }
+    }catch (Exception e) {
+      log.error("ForkJoinPool pool invoke exception", e);
     }
 
     // Build and return the crawl result.
@@ -126,27 +130,32 @@ final class ParallelWebCrawler implements WebCrawler {
       // Check if the URL matches any ignored pattern.
       // 如果 url 已经存在于 visitedUrls 集合中，说明该 URL 已经被爬取过，为了避免重复爬取，需要返回
       // 如果 url 匹配到 ignoredUrls 列表中的任意正则表达式，则该 URL 会被忽略，不再爬取
-      if (!visitedUrls.add(url)) {
-        return; // 已经访问过
-      }
+      // 去重并判断忽略规则
       if (ignoredUrls.stream().anyMatch(pattern -> pattern.matcher(url).matches())) {
-        return; // 匹配到忽略规则
+        return;
+      }
+      if (!visitedUrls.add(url)) {
+        return;
       }
 
-      // Parse the page.
-      PageParser.Result result = parserFactory.get(url).parse();
-      // 将解析结果中的单词和计数合并到共享的 counts 集合中，使用 merge() 方法累加出现次数
-      result.getWordCounts().forEach((word, count) ->
-              counts.merge(word, count, Integer::sum));
+      try {
+        // Parse the page.
+        PageParser.Result result = parserFactory.get(url).parse();
+        // 将解析结果中的单词和计数合并到共享的 counts 集合中，使用 merge() 方法累加出现次数
+        result.getWordCounts().forEach((word, count) ->
+                counts.merge(word, count, Integer::sum));
+        // Create subtasks for each link and invoke them in parallel.
+        // 对于解析出的页面链接，创建新的 CrawlTask 子任务，这些任务将递归地爬取链接
+        List<CrawlTask> subtasks = result.getLinks().stream()
+                .map(link -> new CrawlTask(link, deadline, maxDepth - 1, counts, visitedUrls))
+                .collect(Collectors.toList());
+        // 使用 invokeAll(subtasks) 并行执行所有子任务。invokeAll 会将任务提交给 ForkJoinPool 并等待它们完成，
+        // 这样可以实现并行递归爬取
+        invokeAll(subtasks);
+      } catch (Exception e) {
+        log.error("ForkJoinPool subtasks invokeAll exception", e);
+      }
 
-      // Create subtasks for each link and invoke them in parallel.
-      // 对于解析出的页面链接，创建新的 CrawlTask 子任务，这些任务将递归地爬取链接
-      List<CrawlTask> subtasks = result.getLinks().stream()
-              .map(link -> new CrawlTask(link, deadline, maxDepth - 1, counts, visitedUrls))
-              .collect(Collectors.toList());
-      // 使用 invokeAll(subtasks) 并行执行所有子任务。invokeAll 会将任务提交给 ForkJoinPool 并等待它们完成，
-      // 这样可以实现并行递归爬取
-      invokeAll(subtasks);
     }
   }
 }

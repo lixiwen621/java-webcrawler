@@ -171,8 +171,8 @@ public final class WebCrawlerTest {
             .setPopularWordCount(3)
             .addStartPages(Paths.get(DATA_DIR, "test-page.html").toUri().toString())
             .addStartPages(Paths.get(DATA_DIR, "infinite-loop.html").toUri().toString())
-            .addIgnoredUrls(".*-loop\\.html$")
-            .addIgnoredUrls(".*dead-.*")
+            .addIgnoredUrls(".*-loop\\.html$") // 忽略所有以 -loop.html 结尾的 URL
+            .addIgnoredUrls(".*dead-.*") //忽略所有包含 dead- 的 URL
             .build();
     Guice.createInjector(new WebCrawlerModule(config), new NoOpProfilerModule())
         .injectMembers(this);
