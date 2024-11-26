@@ -3,14 +3,15 @@ package com.udacity.webcrawler.main;
 import com.google.inject.Guice;
 import com.udacity.webcrawler.WebCrawler;
 import com.udacity.webcrawler.WebCrawlerModule;
-import com.udacity.webcrawler.json.*;
+import com.udacity.webcrawler.json.ConfigurationLoader;
+import com.udacity.webcrawler.json.CrawlResult;
+import com.udacity.webcrawler.json.CrawlResultWriter;
+import com.udacity.webcrawler.json.CrawlerConfiguration;
 import com.udacity.webcrawler.profiler.Profiler;
 import com.udacity.webcrawler.profiler.ProfilerModule;
 
 import javax.inject.Inject;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
+import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -33,15 +34,18 @@ public final class WebCrawlerMain {
     CrawlResult result = crawler.crawl(config.getStartPages());
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
     if (config.getResultPath().isEmpty()) {
-      // 将 System.out 包装为 PrintWriter
-      resultWriter.write(new PrintWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8)));
+      // 使用 StringWriter 把数据写入到缓存流中 避免使用 System.out
+      StringWriter stringWriter = new StringWriter(); // 写入到缓冲流
+      resultWriter.write(stringWriter); // 写入数据stringWriter缓冲流
+      System.out.println(stringWriter); // 输出缓冲内容到控制台
     } else {
       resultWriter.write(Path.of(config.getResultPath()));
     }
-
     if (config.getProfileOutputPath().isEmpty()) {
-      // 将 System.out 包装为 PrintWriter
-      profiler.writeData(new PrintWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8)));
+      // 使用 StringWriter 把数据写入到缓存流中 避免使用 System.out
+      StringWriter stringWriter = new StringWriter();
+      profiler.writeData(stringWriter);
+      System.out.println(stringWriter); // 输出缓冲内容到控制台
     } else {
       profiler.writeData(Path.of(config.getProfileOutputPath()));
     }

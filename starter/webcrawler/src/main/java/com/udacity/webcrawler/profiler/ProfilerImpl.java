@@ -103,9 +103,11 @@ final class ProfilerImpl implements Profiler {
   @Override
   public void writeData(Writer writer) throws IOException {
     // RFC 1123 是一个用于互联网协议的日期和时间格式标准 Tue, 3 Jun 2008 11:05:30 GMT
+    // 写入运行时间信息
     writer.write("Run at " + RFC_1123_DATE_TIME.format(startTime));
     // 写一个换行符
     writer.write(System.lineSeparator());
+    // 写入性能分析状态
     state.write(writer);
     writer.write(System.lineSeparator());
   }
