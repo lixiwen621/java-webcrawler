@@ -1,10 +1,9 @@
 {
-  "startPages": ["https://www.udacity.com/"],
-  "ignoredUrls": ["https://blog.udacity.com/.*"],
+  "startPages": ["https://www.taobao.com/"],
+  "ignoredUrls": ["https://blod.taobao.com/.*"],
   "ignoredWords": ["^.{1,3}$"],
   "parallelism": 4,
   "maxDepth": 2,
-  "timeoutSeconds": 5,
-  "popularWordCount": 5,
-  "profileOutputPath": "profileData.txt"
+  "timeoutSeconds": 2,
+  "popularWordCount": 5
 }
