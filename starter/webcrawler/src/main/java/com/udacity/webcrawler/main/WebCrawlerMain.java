@@ -34,6 +34,7 @@ public final class WebCrawlerMain {
     CrawlResult result = crawler.crawl(config.getStartPages());
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
     if (config.getResultPath().isEmpty()) {
+      // Use StringWriter to write data to the cache stream. Avoid using System.out
       // 使用 StringWriter 把数据写入到缓存流中 避免使用 System.out
       StringWriter stringWriter = new StringWriter(); // 写入到缓冲流
       resultWriter.write(stringWriter); // 写入数据stringWriter缓冲流
@@ -42,6 +43,7 @@ public final class WebCrawlerMain {
       resultWriter.write(Path.of(config.getResultPath()));
     }
     if (config.getProfileOutputPath().isEmpty()) {
+      // Use StringWriter to write data to the cache stream. Avoid using System.out
       // 使用 StringWriter 把数据写入到缓存流中 避免使用 System.out
       StringWriter stringWriter = new StringWriter();
       profiler.writeData(stringWriter);
