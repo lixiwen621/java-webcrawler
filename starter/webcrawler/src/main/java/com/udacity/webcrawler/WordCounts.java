@@ -63,12 +63,17 @@ final class WordCounts {
   private static final class WordCountComparator implements Comparator<Map.Entry<String, Integer>> {
     @Override
     public int compare(Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
-      if (!a.getValue().equals(b.getValue())) {
-        return b.getValue() - a.getValue();
+      // 按值从大到小排序
+      int valueComparison = Integer.compare(b.getValue(), a.getValue());
+      if (valueComparison != 0) {
+        return valueComparison;
       }
-      if (a.getKey().length() != b.getKey().length()) {
-        return b.getKey().length() - a.getKey().length();
+      // 按键长度从大到小排序
+      int lengthComparison = Integer.compare(b.getKey().length(), a.getKey().length());
+      if (lengthComparison != 0) {
+        return lengthComparison;
       }
+      // 按键的字典顺序排序
       return a.getKey().compareTo(b.getKey());
     }
   }

@@ -2,3 +2,27 @@ Run at Fri, 15 Nov 2024 07:24:36 GMT
 com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 5s 218ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
 com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 301ms on average over 44 calls. Thread call counts: [Thread 18: 17 calls, Thread 21: 14 calls, Thread 22: 14 calls]
 
+Run at Fri, 15 Nov 2024 08:38:50 GMT
+com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 5s 247ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 237ms on average over 58 calls. Thread call counts: [Thread 18: 21 calls, Thread 21: 18 calls, Thread 22: 19 calls]
+
+Run at Sat, 23 Nov 2024 07:56:56 GMT
+com.udacity.webcrawler.SequentialWebCrawler#crawl took 0m 5s 432ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 492ms on average over 11 calls. Thread call counts: [Thread 1: 11 calls]
+
+Run at Sat, 23 Nov 2024 07:58:39 GMT
+com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 3s 40ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 317ms on average over 24 calls. Thread call counts: [Thread 18: 8 calls, Thread 21: 7 calls, Thread 22: 9 calls]
+
+Run at Sat, 23 Nov 2024 07:59:18 GMT
+com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 2s 603ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 294ms on average over 24 calls. Thread call counts: [Thread 18: 10 calls, Thread 21: 7 calls, Thread 22: 7 calls]
+
+Run at Tue, 26 Nov 2024 08:12:15 GMT
+com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 2s 663ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 393ms on average over 23 calls. Thread call counts: [Thread 18: 6 calls, Thread 21: 3 calls, Thread 22: 3 calls, Thread 23: 4 calls, Thread 24: 4 calls, Thread 25: 3 calls]
+
+Run at Tue, 26 Nov 2024 08:13:46 GMT
+com.udacity.webcrawler.ParallelWebCrawler#crawl took 0m 1s 452ms on average over 1 calls. Thread call counts: [Thread 1: 1 calls]
+com.udacity.webcrawler.parser.PageParserImpl#parse took 0m 0s 293ms on average over 23 calls. Thread call counts: [Thread 18: 4 calls, Thread 21: 4 calls, Thread 22: 4 calls, Thread 23: 4 calls, Thread 24: 3 calls, Thread 25: 4 calls]
+
